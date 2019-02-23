@@ -99,6 +99,27 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
+        String arrayAsOneStringInLowerCase = String.join("", array).toLowerCase();
+        String[] arrayWithEachCharAsAnElement = arrayAsOneStringInLowerCase.split("");
+        //System.out.println(Arrays.toString(arrayWithEachCharAsAnElement));
+        
+        String valueToRemove = " ";
+        String[] arrayOfOnlyLettersNoSpaces = removeValue(arrayWithEachCharAsAnElement, valueToRemove);
+        //System.out.println(Arrays.toString(arrayOfOnlyLettersNoSpaces));
+        
+        // need to sort array in order to be able to remove consecutive duplicates
+        // in the next method
+        Arrays.sort(arrayOfOnlyLettersNoSpaces);
+        //System.out.println(Arrays.toString(arrayOfOnlyLettersNoSpaces));
+        
+        // the English alphabet contains 26 letters
+        String[] finalArrayShouldHaveLengthOf26 = removeConsecutiveDuplicates(arrayOfOnlyLettersNoSpaces);
+        //System.out.println(Arrays.toString(finalArrayShouldHaveLengthOf26));
+        
+        return (finalArrayShouldHaveLengthOf26.length == 26);
+        
+        /* This code works, but I don't have to actually provide the whole alphabet
+         * 
         boolean isPangramic = true;
         String arrayAsStringJoinedLowerCase = String.join("", array).toLowerCase();
         String[] eachCharArray = arrayAsStringJoinedLowerCase.split("");
@@ -114,7 +135,9 @@ public class StringArrayUtils {
         }
 
         return isPangramic;
-        
+        */
+       
+       
         /* This code works, but it's longer than necessary
          * 
         // keep count with a number
